@@ -19,4 +19,6 @@ export default defineNuxtConfig({
     viewer: { endpoint: "/_tailwind", exportViewer: true },
     exposeConfig: false,
   },
+
+  plugins: ["~/plugins/preline.client.ts"],
 });
