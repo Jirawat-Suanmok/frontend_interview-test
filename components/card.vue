@@ -1,30 +1,48 @@
 <template>
   <div
-    class="flex flex-col bg-white border shadow-md rounded-xl hover:cursor-pointer hover:scale-105 duration-500 ease-in-out"
+    class="flex flex-col bg-white border shadow-md rounded-xl hover:cursor-default hover:scale-105 hover:shadow-lg duration-500 ease-in-out"
   >
-    <div class="aspect-[4/3] overflow-hidden">
+    <div class="aspect-[4/3] overflow-hidden relative">
       <!-- Image -->
       <img
         class="w-full h-full rounded-t-xl"
-        src="https://images.unsplash.com/photo-1680868543815-b8666dba60f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80"
+        :src="item.photolink"
         alt="Product Image"
       />
+      <!-- Tag -->
+      <div
+        class="bg-gray-800/60 text-white text-sm font-medium px-2 py-0.5 absolute top-4 left-4 rounded-md"
+      >
+        {{ item.category }}
+      </div>
     </div>
 
     <div class="p-4 md:p-5">
       <!-- Title -->
-      <h3 class="text-lg font-bold text-gray-800 line-clamp-2">Card title</h3>
+      <h3 class="text-lg font-bold text-gray-800 line-clamp-1">
+        {{ item.bookname }}
+      </h3>
       <!-- Detail -->
-      <p class="mt-1 text-gray-500 line-clamp-3">
-        Some quick example text to build on the card title and make up the bulk
-        of the card's content.
+      <p class="mt-1 text-gray-500 line-clamp-2">
+        {{ item.detail }}
       </p>
-      <!-- Price -->
-      <p class="mt-1 text-gray-500">$199</p>
+      <div class="mt-2 flex items-start justify-between">
+        <!-- Price -->
+        <p class="font-bold text-gray-800">{{ item.price }} THB</p>
+        <!-- Button -->
+        <Button> Add to Cart</Button>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-//
+import Button from "./button.vue";
+
+defineProps({
+  item: {
+    type: Object,
+    required: true,
+  },
+});
 </script>
