@@ -18,7 +18,7 @@
             id="hs-scale-animation-modal-label"
             class="font-bold text-gray-800"
           >
-            You have {{ store.count }} items in your cart
+            You have {{ orderStore.items.length }} items in your cart
           </h3>
 
           <button
@@ -48,18 +48,14 @@
 
         <!-- Content -->
         <div class="p-4 max-h-[480px] overflow-y-auto">
-          <CardCart />
-          <CardCart />
-          <CardCart />
-          <CardCart />
-          <CardCart />
-          <CardCart />
+          <CardCart v-for="order in orderStore.items" :item="order" />
         </div>
 
         <!-- Footer -->
         <div class="flex flex-col items-end justify-center gap-y-2 py-3 px-4">
           <div class="font-bold text-gray-800">
-            Total: <span class="text-blue-600">100</span> THB
+            Total:
+            <span class="text-blue-600">{{ orderStore.getTotal() }}</span> THB
           </div>
 
           <div class="flex justify-end items-center gap-x-2">
@@ -85,7 +81,8 @@
 
 <script setup lang="ts">
 import CardCart from "./card/cardCart.vue";
-import { useCounterStore } from "~/stores/counter";
 
-const store = useCounterStore();
+import { useOrderStore } from "~/stores/order";
+
+const orderStore = useOrderStore();
 </script>

@@ -4,33 +4,35 @@
       <!-- Image -->
       <img
         class="w-full h-full rounded-xl"
-        src="https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL3JtMzYyLTAxYS1tb2NrdXAuanBn.jpg"
+        :src="item.photolink"
         alt="Product Image"
       />
-      <!-- Tag -->
-      <!-- <div
-        class="bg-gray-800/60 text-white text-sm font-medium px-2 py-0.5 absolute top-4 left-4 rounded-md"
-      >
-        item.category
-      </div> -->
     </div>
 
-    <div class="p-4 md:p-5">
+    <div class="px-4 md:px-5">
+      <!-- Tag -->
+      <div
+        class="bg-gray-800/60 text-white text-sm font-medium px-2 py-0.5 absolute top-4 left-4 rounded-md"
+      >
+        {{ item.category }}
+      </div>
       <!-- Title -->
       <h3 class="text-lg font-bold text-gray-800 line-clamp-1">
-        item.bookname
+        {{ item.bookname }}
       </h3>
       <!-- Detail -->
-      <p class="mt-1 text-gray-500 line-clamp-2">item.detail</p>
+      <p class="mt-1 text-gray-500 line-clamp-2">{{ item.detail }}</p>
       <div class="mt-2 flex items-start justify-between">
         <!-- Price -->
-        <p class="font-bold text-gray-800">item.price THB</p>
+        <p class="font-bold text-gray-800">{{ item.price }} THB</p>
+        <!-- Quantity -->
+        <InputNumber :item="item" />
       </div>
     </div>
 
-    <div class="flex items-center justify-center ml-auto mr-2">
+    <div class="flex items-center justify-center gap-2 ml-auto mr-2">
       <!-- Delete -->
-      <button @click="store.decrement">
+      <button @click="orderStore.removeItemToOrder(item.id)">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -51,7 +53,14 @@
 </template>
 
 <script setup lang="ts">
-import { useCounterStore } from "~/stores/counter";
+import { useOrderStore } from "~/stores/order";
 
-const store = useCounterStore();
+defineProps({
+  item: {
+    type: Object,
+    required: true,
+  },
+});
+
+const orderStore = useOrderStore();
 </script>

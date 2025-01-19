@@ -30,7 +30,7 @@
         <!-- Price -->
         <p class="font-bold text-gray-800">{{ item.price }} THB</p>
         <!-- Button -->
-        <Button @click="store.increment()"> Add to Cart</Button>
+        <Button @click="order.addItemToOrder(item)"> Add to Cart</Button>
       </div>
     </div>
   </div>
@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import Button from "../button.vue";
 
-import { useCounterStore } from "~/stores/counter";
+import { useOrderStore } from "~/stores/order";
 
 defineProps({
   item: {
@@ -48,5 +48,5 @@ defineProps({
   },
 });
 
-const store = useCounterStore();
+const order = useOrderStore();
 </script>
