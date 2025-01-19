@@ -55,7 +55,7 @@
         <div class="flex flex-col items-end justify-center gap-y-2 py-3 px-4">
           <div class="font-bold text-gray-800">
             Total:
-            <span class="text-blue-600">{{ orderStore.getTotal() }}</span> THB
+            <span class="text-blue-600 ml-2">{{ formattedTotal }}</span>
           </div>
 
           <div class="flex justify-end items-center gap-x-2">
@@ -85,4 +85,11 @@ import CardCart from "./card/cardCart.vue";
 import { useOrderStore } from "~/stores/order";
 
 const orderStore = useOrderStore();
+
+const formattedTotal = computed(() => {
+  return new Intl.NumberFormat("th", {
+    style: "currency",
+    currency: "THB",
+  }).format(orderStore.getTotal());
+});
 </script>

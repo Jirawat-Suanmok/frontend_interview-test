@@ -5,10 +5,7 @@
       <button
         type="button"
         class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
-        tabindex="-1"
-        aria-label="Decrease"
-        data-hs-input-number-decrement=""
-        @click="orderStore.decrement(item)"
+        @click="orderStore.decrement(item.id)"
       >
         <svg
           class="shrink-0 size-3.5"
@@ -29,20 +26,15 @@
       <!-- Show Quantity -->
       <input
         class="p-0 w-6 bg-transparent border-0 text-gray-800 text-center focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-        style="-moz-appearance: textfield"
         type="number"
-        aria-roledescription="Number field"
+        disabled
         :value="item.quantity"
-        data-hs-input-number-input=""
       />
 
       <!-- BTN Add Quantity -->
       <button
         type="button"
         class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
-        tabindex="-1"
-        aria-label="Increase"
-        data-hs-input-number-increment=""
         @click="orderStore.addItemToOrder(item)"
       >
         <svg

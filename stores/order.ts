@@ -2,7 +2,7 @@
 import { defineStore } from "pinia";
 
 interface OrderItem {
-  id: string;
+  id: number;
   image: string;
   name: string;
   detail: string;
@@ -20,6 +20,11 @@ export const useOrderStore = defineStore("order", {
   }),
 
   actions: {
+    initializeStore() {
+      const items = JSON.parse(localStorage.getItem("order.items") || "[]");
+      this.items = items;
+    },
+
     addItemToOrder(item: any) {
       const existingItem = this.items.find(
         (orderItem) => orderItem.id === item.id
@@ -31,27 +36,28 @@ export const useOrderStore = defineStore("order", {
         this.items.push({ ...item, quantity: 1 });
       }
 
-      console.log(this.items);
+      localStorage.setItem("order.items", JSON.stringify(this.items));
     },
 
-    decrement(item: any) {
+    decrement(itemId: number) {
       const existingItem = this.items.find(
-        (orderItem) => orderItem.id === item.id
+        (orderItem) => orderItem.id === itemId
       );
 
       if (existingItem) {
         if (existingItem.quantity > 1) {
           existingItem.quantity--;
         } else {
-          this.items = this.items.filter(
-            (orderItem) => orderItem.id !== item.id
-          );
+          return this.removeItemToOrder(itemId);
         }
       }
+
+      localStorage.setItem("order.items", JSON.stringify(this.items));
     },
 
-    removeItemToOrder(itemId: string) {
+    removeItemToOrder(itemId: number) {
       this.items = this.items.filter((item) => item.id !== itemId);
+      localStorage.setItem("order.items", JSON.stringify(this.items));
     },
 
     getQuantity() {
