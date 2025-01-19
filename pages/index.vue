@@ -16,6 +16,7 @@
                 dark
                 name="category[]"
                 :value="category"
+                :checked="categoryParam.includes(category)"
               />
               <label
                 :for="index + `-hs-default-checkbox`"
@@ -54,7 +55,13 @@ import Pagination from "~/components/pagination.vue";
 
 import { useRoute } from "vue-router";
 
+import { useOrderStore } from "~/stores/order";
+
+const orderStore = useOrderStore();
+
 const { $axios } = useNuxtApp();
+
+const categoryParam = ref([] as any[]);
 
 const route = useRoute();
 
@@ -67,6 +74,8 @@ const totalItems = ref(0);
 const totalPages = computed(() => Math.ceil(totalItems.value / itemsPerPage));
 
 onMounted(async () => {
+  orderStore.initializeStore();
+
   try {
     const response = await $axios.get("/items");
     if (response?.data?.code === 200) {
@@ -79,12 +88,16 @@ onMounted(async () => {
       categories.value = unique;
       console.log("categories ==>", categories.value);
 
-      const categoryParam = route.query["category[]"] || "";
+      categoryParam.value = Array.isArray(route.query["category[]"])
+        ? route.query["category[]"]
+        : route.query["category[]"]
+        ? [route.query["category[]"]]
+        : [];
       console.log("categoryParam ==>", categoryParam);
 
-      if (categoryParam && categoryParam.length > 0) {
+      if (categoryParam.value && categoryParam.value.length > 0) {
         products.value = response.data.data.filter((item: any) =>
-          categoryParam.includes(item.category)
+          categoryParam.value.includes(item.category)
         );
 
         (totalItems.value = products.value.length),
