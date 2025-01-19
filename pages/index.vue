@@ -33,6 +33,8 @@
 
       <!-- Products -->
       <div class="w-full h-full col-span-9">
+        <p class="text-md text-gray-800 mb-4">result: {{ totalItems }}</p>
+
         <div
           class="w-full h-full grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8"
         >
@@ -59,6 +61,11 @@ const route = useRoute();
 const products = ref();
 const categories = ref();
 
+const currentPage = ref(1);
+const itemsPerPage = 12;
+const totalItems = ref(0);
+const totalPages = computed(() => Math.ceil(totalItems.value / itemsPerPage));
+
 onMounted(async () => {
   try {
     const response = await $axios.get("/items");
@@ -70,17 +77,25 @@ onMounted(async () => {
         (value: any, index: any, array: any) => array.indexOf(value) === index
       );
       categories.value = unique;
-      console.log(categories.value);
+      console.log("categories ==>", categories.value);
 
       const categoryParam = route.query["category[]"] || "";
-      console.log(categoryParam);
+      console.log("categoryParam ==>", categoryParam);
 
       if (categoryParam && categoryParam.length > 0) {
         products.value = response.data.data.filter((item: any) =>
           categoryParam.includes(item.category)
         );
+
+        (totalItems.value = products.value.length),
+          console.log("totalItems ==>", totalItems.value);
+        console.log("totalPages ==>", totalPages.value);
       } else {
         products.value = response.data.data;
+
+        (totalItems.value = products.value.length),
+          console.log("totalItems ==>", totalItems.value);
+        console.log("totalPages ==>", totalPages.value);
       }
     } else {
       console.error("API response not successful:", response);
