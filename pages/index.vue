@@ -1,39 +1,46 @@
 <template>
   <div>
-    <div class="grid grid-cols-12">
-      <div class="bg-red-100 w-full h-full col-span-3">
+    <div class="grid grid-cols-12 gap-2 mx-4">
+      <!-- Sidebar -->
+      <div class="w-full h-full border shadow-md rounded-xl col-span-3">
         <form>
-          <div
-            v-for="(category, index) in categories"
-            :key="index"
-            class="flex"
-          >
-            <input
-              type="checkbox"
-              class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-              :id="index + `-hs-default-checkbox`"
-              name="category[]"
-              :value="category"
-            />
-            <label
-              :for="index + `-hs-default-checkbox`"
-              class="text-sm text-gray-500 ms-3 dark:text-neutral-400"
-              >{{ category }}</label
-            >
-          </div>
+          <p class="text-md text-gray-800 font-bold ps-4 mt-14">
+            Product Category
+          </p>
+          <ul class="pt-2 ps-7 space-y-1">
+            <li v-for="(category, index) in categories" :key="index">
+              <input
+                type="checkbox"
+                class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 hover:cursor-pointer focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none :bg-neutral-800"
+                :id="index + `-hs-default-checkbox`"
+                dark
+                name="category[]"
+                :value="category"
+              />
+              <label
+                :for="index + `-hs-default-checkbox`"
+                class="text-md text-gray-600 ms-3 hover:cursor-pointer"
+                >{{ category }}</label
+              >
+            </li>
+          </ul>
 
-          <Button type="submit">Filter</Button>
+          <div class="flex items-center justify-center mt-6">
+            <Button type="submit">Filter</Button>
+          </div>
         </form>
       </div>
 
+      <!-- Products -->
       <div class="w-full h-full col-span-9">
         <div
-          class="w-full h-full grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 px-6"
+          class="w-full h-full grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8"
         >
           <Card v-for="product in products" :key="product.id" :item="product" />
         </div>
       </div>
     </div>
+
     <Pagination />
   </div>
 </template>
