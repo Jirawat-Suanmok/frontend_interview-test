@@ -67,7 +67,7 @@
           class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5"
         >
           <a
-            class="font-medium text-white focus:outline-none dark:text-black"
+            class="font-medium text-white focus:outline-none"
             href="/"
             aria-current="page"
             >Home
