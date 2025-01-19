@@ -30,14 +30,16 @@
         <!-- Price -->
         <p class="font-bold text-gray-800">{{ item.price }} THB</p>
         <!-- Button -->
-        <Button> Add to Cart</Button>
+        <Button @click="store.increment()"> Add to Cart</Button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import Button from "./button.vue";
+import Button from "../button.vue";
+
+import { useCounterStore } from "~/stores/counter";
 
 defineProps({
   item: {
@@ -45,4 +47,6 @@ defineProps({
     required: true,
   },
 });
+
+const store = useCounterStore();
 </script>

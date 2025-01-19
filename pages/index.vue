@@ -47,7 +47,7 @@
 
 <script setup lang="ts">
 import Button from "~/components/button.vue";
-import Card from "~/components/card.vue";
+import Card from "~/components/card/card.vue";
 import Pagination from "~/components/pagination.vue";
 
 import { useRoute } from "vue-router";
