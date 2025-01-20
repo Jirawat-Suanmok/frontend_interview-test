@@ -2,7 +2,9 @@
   <div>
     <div class="grid grid-cols-12 gap-2 mx-4">
       <!-- Sidebar -->
-      <div class="w-full h-full border shadow-md rounded-xl col-span-3">
+      <div
+        class="w-full h-full border shadow-md rounded-xl col-span-5 sm:col-span-3"
+      >
         <form>
           <p class="text-md text-gray-800 font-bold ps-4 mt-14">
             Product Category
@@ -33,11 +35,11 @@
       </div>
 
       <!-- Products -->
-      <div class="w-full h-full col-span-9">
+      <div class="w-full h-full col-span-7 sm:col-span-9">
         <p class="text-md text-gray-800 mb-4">result: {{ totalItems }}</p>
 
         <div
-          class="w-full h-full grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8"
+          class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8"
         >
           <Card v-for="product in products" :key="product.id" :item="product" />
         </div>

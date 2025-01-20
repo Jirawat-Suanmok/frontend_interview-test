@@ -66,23 +66,6 @@
         <div
           class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5"
         >
-          <a
-            class="font-medium text-white focus:outline-none"
-            href="/"
-            aria-current="page"
-            >Home
-          </a>
-          <a
-            class="font-medium text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500"
-            href="/"
-            >Blog
-          </a>
-          <a
-            class="font-medium text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500"
-            href="/"
-            >Contact Us
-          </a>
-
           <button>
             <svg
               xmlns="http://www.w3.org/2000/svg"
