@@ -51,6 +51,7 @@
       :total="totalPages"
       :items="itemsPerPage"
       @customEvent="changePage"
+      @customItemPerPage="changeItemPerPage"
     />
   </div>
 </template>
@@ -132,5 +133,11 @@ function changePage(pageNumber: any) {
   currentPage.value = pageNumber;
 
   console.log(currentPage.value);
+}
+
+function changeItemPerPage(resultPerPage: any) {
+  itemsPerPage.value = resultPerPage;
+
+  console.log("changeItemPerPage", itemsPerPage.value);
 }
 </script>

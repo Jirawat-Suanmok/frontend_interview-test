@@ -12,6 +12,7 @@
         type="number"
         class="min-h-[32px] py-1 px-2.5 block w-12 border border-gray-400 rounded-lg text-sm text-center focus:border-blue-500 focus:ring-blue-500 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none disabled:opacity-50 disabled:pointer-events-none"
         :value="items"
+        @keyup.enter="sendItemPerPage($event)"
       />
     </div>
 
@@ -102,10 +103,22 @@ defineProps({
     required: true,
   },
 });
-
 const emit = defineEmits(["customEvent", "customItemPerPage"]);
 
 function sendData(data: any) {
   emit("customEvent", data);
+}
+
+function sendItemPerPage(event: KeyboardEvent) {
+  const target = event.target as HTMLInputElement;
+  const inputValue = Number(target.value);
+
+  if (!isNaN(inputValue) && inputValue != 0) {
+    console.log(`Items per page: ${inputValue}`);
+
+    emit("customItemPerPage", inputValue);
+  } else {
+    console.log("Invalid input. Please enter a number.");
+  }
 }
 </script>
