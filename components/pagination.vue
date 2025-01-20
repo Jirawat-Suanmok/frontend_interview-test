@@ -22,6 +22,7 @@
         class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
         aria-label="Previous"
         :disabled="current === 1"
+        @click="sendData(current - 1)"
       >
         <svg
           class="shrink-0 size-3.5"
@@ -49,8 +50,10 @@
           class="min-h-[38px] min-w-[38px] flex justify-center items-center border border-gray-200 text-gray-800 py-2 px-3 text-sm rounded-lg focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
           aria-current="page"
           :class="{
-            'bg-blue-600 text-white pointer-events-none': current === page,
+            'bg-blue-600 text-white pointer-events-none focus:!bg-blue-600':
+              current === page,
           }"
+          @click="sendData(page)"
         >
           {{ page }}
         </button>
@@ -62,6 +65,7 @@
         class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
         aria-label="Next"
         :disabled="current === total"
+        @click="sendData(current + 1)"
       >
         <span class="sr-only">Next</span>
         <svg
@@ -98,4 +102,10 @@ defineProps({
     required: true,
   },
 });
+
+const emit = defineEmits(["customEvent", "customItemPerPage"]);
+
+function sendData(data: any) {
+  emit("customEvent", data);
+}
 </script>

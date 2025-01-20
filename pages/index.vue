@@ -50,6 +50,7 @@
       :current="currentPage"
       :total="totalPages"
       :items="itemsPerPage"
+      @customEvent="changePage"
     />
   </div>
 </template>
@@ -74,10 +75,13 @@ const route = useRoute();
 const products = ref();
 const categories = ref();
 
-const currentPage = ref(1);
-const itemsPerPage = 12;
-const totalItems = ref(0);
-const totalPages = computed(() => Math.ceil(totalItems.value / itemsPerPage));
+const currentPage = ref<number>(1);
+const itemsPerPage = ref<number>(12);
+const totalItems = ref<number>(0);
+const totalPages = computed(() => {
+  const items = itemsPerPage.value || 1;
+  return Math.ceil(totalItems.value / items);
+});
 
 onMounted(async () => {
   orderStore.initializeStore();
@@ -123,4 +127,10 @@ onMounted(async () => {
     console.error("Error fetching products:", error);
   }
 });
+
+function changePage(pageNumber: any) {
+  currentPage.value = pageNumber;
+
+  console.log(currentPage.value);
+}
 </script>
