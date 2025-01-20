@@ -46,7 +46,11 @@
       </div>
     </div>
 
-    <Pagination />
+    <Pagination
+      :current="currentPage"
+      :total="totalPages"
+      :items="itemsPerPage"
+    />
   </div>
 </template>
 
